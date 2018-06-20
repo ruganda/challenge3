@@ -2,8 +2,8 @@
 import unittest
 import psycopg2
 from flask import json
-from app.models.user import User
-from app.models.rides import Ride
+from app.models import User, Ride,Request
+
 
 # from app import create_app,
 from app import create_app
