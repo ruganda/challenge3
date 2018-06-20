@@ -1,7 +1,7 @@
 
 from flask.views import MethodView
 from flask import jsonify, request, abort, make_response
-from app.models.user import User
+from app.models import User
 import jwt
 import datetime
 

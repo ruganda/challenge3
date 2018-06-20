@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import request, jsonify
 import jwt
-from app.models.user import User
+from app.models import User
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):

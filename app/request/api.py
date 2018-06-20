@@ -1,6 +1,6 @@
 from flask.views import MethodView
 from flask import jsonify, request, abort, make_response
-from app.models.requests import Request
+from app.models import Request
 import uuid
 from app.auth.decoractor import token_required
 
