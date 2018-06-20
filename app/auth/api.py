@@ -56,7 +56,7 @@ class LoginView(MethodView):
             if user.username == data['username'] and user.password == data['password']:
                 # Generate the access token
                 token=jwt.encode({'username': user.username, 'exp': datetime.datetime.utcnow()
-                            + datetime.timedelta(minutes=30)}, 'donttouch')
+                            + datetime.timedelta(minutes=60)}, 'donttouch')
                 if token:
                     response={
                         'message': 'You logged in successfully.',

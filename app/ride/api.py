@@ -2,10 +2,13 @@ from flask.views import MethodView
 from flask import jsonify, request, abort, make_response
 from app.models.rides import Ride
 import uuid
+from app.auth.decoractor import token_required
 
 
+    
 class RideAPI(MethodView):
-
+    decorators = [token_required]
+    
     def __init__(self):
 
         if request.method != 'GET' and not request.json:
@@ -13,7 +16,7 @@ class RideAPI(MethodView):
 
     
     
-    def get(self, r_id):
+    def get(self,current_user, r_id):
         """Method for  get requests"""
         if r_id:
             try:
@@ -40,7 +43,7 @@ class RideAPI(MethodView):
                 }
                 return make_response(jsonify(response)), 500
 
-    def post(self):
+    def post(self, current_user):
         """offers a new ride"""
         data = request.json
 
