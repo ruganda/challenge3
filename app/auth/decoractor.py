@@ -5,6 +5,7 @@ from app.models import User
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+
         token = None
 
         if 'Authorization' in request.headers:
@@ -15,7 +16,8 @@ def token_required(f):
 
         try: 
             data = jwt.decode(token, 'donttouch')
-            current_user = User.fetch_by_username(data['username'])
+            user = User(data['username'])
+            current_user = user.get_single_user(data['username'])
         except:
             return jsonify({'message' : 'Token is invalid!'}), 401
 

@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 
 def create_app(configuration_name):
+    
     app.config.from_object(configuration[configuration_name])
 
     from app.ride.views import ride_app

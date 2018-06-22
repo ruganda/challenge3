@@ -10,14 +10,14 @@ class TestAuth(TestBase):
     connection = psycopg2.connect(
             "dbname='ride_db' user='postgres' host='localhost' password='15december' port ='5432'")
     cursor = connection.cursor()
-    cursor.execute("DELETE FROM users WHERE username = %s", ('user',))
+    cursor.execute("DELETE FROM users WHERE username = %s", ('username',))
     connection.commit()
     connection.close()
     def test_register_valid_details(self):
         """ Tests creating a new user with valid details """
         user = {
             'name': 'test user',
-            'username': 'user',
+            'username': 'username',
             'password': 'password'
         }
         response = self.client.post('/api/v1/register',
@@ -39,7 +39,7 @@ class TestAuth(TestBase):
         """ Tests login with valid credentials """
         self.create_valid_user()
         user = {
-            'username': 'testuser',#credentials for valid user , defined in test_base.py
+            'username': 'validuser',#credentials for valid user , defined in test_base.py
             'password': 'password' 
         }
         response = self.client.post('/api/v1/login', data=json.dumps(user),

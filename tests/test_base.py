@@ -13,7 +13,7 @@ class TestBase(unittest.TestCase):
 
     app = create_app('TESTING')
     app.app_context().push()
-
+    
     client = app.test_client()
     
     name = 'Muba'
@@ -30,7 +30,7 @@ class TestBase(unittest.TestCase):
 
     valid_user = {
         'name': 'Test User',
-        'username': 'testuser',
+        'username': 'validuser',
         'password': 'password'
     }
     

@@ -13,10 +13,11 @@ class RegistrationView(MethodView):
         """registers a user"""
         data = request.json
         # Query to see if the user already exists
-        user = User.fetch_by_username(data['username'])
+        user_object = User(data['name'],data['username'],data['password'])
+        user = user_object.get_single_user(data['username'])
+        print(user)
         if not user:
             try:
-
                 # Register the user
                 name = data['name']
                 username = data['username']
@@ -49,9 +50,9 @@ class LoginView(MethodView):
         '''Logs in a registered user'''
         data = request.json
         try:
-            user_object = User.fetch_by_username(data['username'])
-            user = User(user_id=user_object.user_id, name=user_object.name,
-                        username=user_object.username, password=user_object.password)
+            user = User(data['username'],data['password'])
+            user_object = user.get_single_user(data['username'])
+            user = User(username=user_object[2], password=user_object[3])
             
             if user.username == data['username'] and user.password == data['password']:
                 # Generate the access token
